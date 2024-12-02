@@ -13,4 +13,6 @@ https://dev.to/hariseldon27/localecompare-and-sorting-in-javascript-1god
 
 https://www.geeksforgeeks.org/cocktail-sort/
 
-https://www.google.com/search?sca_esv=c2c3ea615d0b866b&rlz=1C1VDKB_enUS1072US1072&sxsrf=ADLYWIJsSUgi-nDnslvSj_UXKGDLeeGq-A:1733176920528&q=cocktail+sort&udm=7&fbs=AEQNm0Aa4sjWe7Rqy32pFwRj0UkWd8nbOJfsBGGB5IQQO6L3J7pRxUp2pI1mXV9fBsfh39JqJxzRlphkmT2MeVSzs3MQEN5DgZmMeykT7pJra3boNLZnu_5tndbt0B1M3XLn1qbCrHVm5u-tncY-lmea9PiStNZ9eJS94DUI766pUVC1fpio1ZP_3qV2amahtpN19jVnfw-T_BjghPRTftMGLk6z20h08A&sa=X&ved=2ahUKEwimhrmVi4qKAxVXMDQIHX6cIJwQtKgLegQIHRAB&biw=1080&bih=1751&dpr=1#fpstate=ive&vld=cid:107485d1,vid:VVyGnL9WG2A,st:0
+https://youtu.be/VVyGnL9WG2A?feature=shared
+
+https://www.javatpoint.com/cocktail-sort
