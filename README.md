@@ -18,6 +18,7 @@ https://youtu.be/VVyGnL9WG2A?feature=shared
 https://www.javatpoint.com/cocktail-sort
 
 
-
+These are the times of the sorts from array size 100 to 1,000,000 elements. When I cut the allowable string length in half, from 2-10 characters to 1-5 characters, the sorting went around 1.5x faster. This shows what I thought, and when the strings have a longer length it is another multiple of work being done. Because obviolusy scanning 10 chars is longer then scanning 5. I plan on trying some other tests with this after I finish the TSP asignments. I want to do a set amount of Ints and Strings, mainly only have 26 ints to sort, all one number long, and have 26 strings but only allowing them to be one character long. Both with shuffled unique values. I would assume they would take pretty much the same time to sort. Then I'm going to run it with merge sort and blow this "Cocktail sort" out of the water.
 
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice."
+![Screenshot (13)](https://github.com/user-attachments/assets/b5e20d8e-0e1d-44d0-ad8d-27b6e32f1767)
