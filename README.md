@@ -22,3 +22,6 @@ These are the times of the sorts from array size 100 to 1,000,000 elements. When
 
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice."
 ![Screenshot (13)](https://github.com/user-attachments/assets/b5e20d8e-0e1d-44d0-ad8d-27b6e32f1767)
+![graph](https://github.com/user-attachments/assets/8e985c70-5e68-4b71-8a2a-fb84dbdf3aa4)
+![Screenshot (179)](https://github.com/user-attachments/assets/19be024a-800d-4f7d-9762-c7da35c50f3f)
+![Screenshot (180)](https://github.com/user-attachments/assets/3be7f078-c636-4004-931a-0ea0f97636e2)
