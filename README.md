@@ -22,6 +22,8 @@ These are the times of the sorts from array size 100 to 1,000,000 elements. When
 
 So as I expected the MergeSort function blew the cocktail sort out of the water. As seen in the graph "Using Merge" it sorted it's portion of the million elements in 504 milliseconds. The cocktail sort took around 31 minutes. My test where I had a fixed set of Ints and strings where both were set to 26, single characters with no duplicates. Still showed the strings took almost 51 times longer then the Integers to sort. 
 
+FULL DISCLOSURE! ChatGPT did 100% of the test code. I could not figure it out as you can see and I just copied and pasted what it gave me. I hope these tests are right because I am braindead 
+
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice."
 ![Screenshot (13)](https://github.com/user-attachments/assets/b5e20d8e-0e1d-44d0-ad8d-27b6e32f1767)
 ![graph](https://github.com/user-attachments/assets/8e985c70-5e68-4b71-8a2a-fb84dbdf3aa4)
