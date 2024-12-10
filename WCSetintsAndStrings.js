@@ -20,7 +20,7 @@ function getIntegers(count, min, max) {
     }
     return integers;
 }
- 
+  
 function getStrings(count) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const availableChars = characters.split('');
