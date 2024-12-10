@@ -1,28 +1,35 @@
-name: Node.js CI
+name: Run Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # Checkout the repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
+      # Install dependencies
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '16'  # Specify your required Node.js version
 
-      - name: Install dependencies
-        run: |
-          npm install jsverify
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Run tests
-        run: |
-          node code.test.js
+      # Run tests for WildCardCocktailSort.js (code.test.js)
+      - name: Run Tests for WildCardCocktailSort.js (code.test.js)
+        run: node code.test.js
+
+      # Run tests for WCSetintsAndStrings.js (code.testSet.js)
+      - name: Run Tests for WCSetintsAndStrings.js (code.testSet.js)
+        run: node code.testSet.js
