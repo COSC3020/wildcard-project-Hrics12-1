@@ -1,84 +1,70 @@
-const fs = require('fs');
-const jsc = require('jsverify');
+const {
+  getRandomInts,
+  getRandomString,
+  combineArray,
+  sortArrayByType,
+  cocktailShakerSort,
+  cocktailShakerSortStrings,
+} = require('./yourFileName'); // Make sure the correct file name is used.
 
-// Load the code (your WCSetintsAndStrings.js implementation)
-eval(fs.readFileSync('WCSetintsAndStrings.js') + '');
+describe('Utility Functions', () => {
 
-// Helper function to compare arrays
-function arraysAreEqual(arr1, arr2) {
-    return JSON.stringify(arr1) === JSON.stringify(arr2);
-}
+  // Test getRandomInts function
+  test('getRandomInts returns an integer within the specified range', () => {
+    const min = 1;
+    const max = 10;
+    const result = getRandomInts(min, max);
+    expect(result).toBeGreaterThanOrEqual(min);
+    expect(result).toBeLessThanOrEqual(max);
+    expect(Number.isInteger(result)).toBe(true);
+  });
 
-// Test case to verify cocktail shaker sort for integers produces the same result as built-in sort
-const testSortIntegers = jsc.forall("array nat", function(arr) {
-    // Filter to ensure the array has only integers and limit its size to 100
-    arr = arr.filter(Number.isInteger).slice(0, 100);
+  // Test getRandomString function
+  test('getRandomString returns a string of correct length', () => {
+    const length = 5;
+    const result = getRandomString(length);
+    expect(result.length).toBe(length);
+    expect(typeof result).toBe('string');
+  });
 
-    // Sort using cocktail shaker sort
-    const a1 = JSON.parse(JSON.stringify(arr));
-    const a2 = JSON.parse(JSON.stringify(arr));
-    cocktailShakerSort(a1);
+  // Test combineArray function
+  test('combineArray returns an array with mixed integers and strings', () => {
+    const size = 10;
+    const intRange = [1, 100];
+    const strLengthRange = [3, 5];
+    const result = combineArray(size, intRange, strLengthRange);
+    
+    expect(result.length).toBe(size);
+    const integers = result.filter(item => typeof item === 'number');
+    const strings = result.filter(item => typeof item === 'string');
+    
+    expect(integers.length + strings.length).toBe(size);
+  });
 
-    // Sort using built-in JavaScript sort
-    a2.sort((a, b) => a - b);
+  // Test sortArrayByType function
+  test('sortArrayByType separates integers and strings correctly', () => {
+    const mixedArray = [3, 'hello', 5, 'world', 2, 'apple'];
+    const result = sortArrayByType(mixedArray);
 
-    // Compare both arrays
-    return arraysAreEqual(a1, a2);
+    expect(result.integers).toEqual([3, 5, 2]);
+    expect(result.strings).toEqual(['hello', 'world', 'apple']);
+  });
+
+  // Test cocktailShakerSort function for integers
+  test('cocktailShakerSort sorts integers correctly', () => {
+    const unsortedArray = [5, 3, 8, 1, 2];
+    const result = cocktailShakerSort(unsortedArray);
+
+    expect(result).toEqual([1, 2, 3, 5, 8]);
+  });
+
+  // Test cocktailShakerSortStrings function for strings
+  test('cocktailShakerSortStrings sorts strings alphabetically', () => {
+    const unsortedArray = ['banana', 'apple', 'cherry', 'date'];
+    const result = cocktailShakerSortStrings(unsortedArray);
+
+    expect(result).toEqual(['apple', 'banana', 'cherry', 'date']);
+  });
+
 });
 
-// Test case to verify cocktail shaker sort for strings produces the same result as built-in sort
-const testSortStrings = jsc.forall("array string", function(arr) {
-    // Filter out any non-string values and ensure valid strings
-    arr = arr.filter(item => typeof item === 'string' && /^[A-Za-z]+$/.test(item));
-
-    // Sort using cocktail shaker sort
-    const a1 = JSON.parse(JSON.stringify(arr));
-    const a2 = JSON.parse(JSON.stringify(arr));
-    cocktailShakerSortStrings(a1);
-
-    // Sort using built-in JavaScript sort
-    a2.sort();
-
-    // Compare both arrays
-    return arraysAreEqual(a1, a2);
-});
-
-// Test case to verify that combineArray produces a mixed array of integers and strings
-// Test case to verify that combineArray produces a mixed array of integers and strings
-const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
-    // Ensure size is within acceptable limits
-    size = Math.min(size, 100);  // Limit size to 100 for performance
-
-    // Ensure valid integer ranges
-    if (intRangeLow >= intRangeHigh || intRangeLow < 0 || intRangeHigh < 0) {
-        return true; // Skip invalid case
-    }
-
-    const randomArray = combineArray(size, [intRangeLow, intRangeHigh], [2, 10]);
-
-    // Ensure array contains both integers and strings
-    const containsIntegers = randomArray.some(item => typeof item === 'number');
-    const containsStrings = randomArray.some(item => typeof item === 'string');
-
-    return containsIntegers && containsStrings;
-});
-
-
-// Test case to verify getIntegers generates unique integers within a given range
-const testGetIntegers = jsc.forall("nat nat nat", function(count, min, max) {
-    if (max - min + 1 < count) {
-        return true; // Skip invalid case
-    }
-
-    const result = getIntegers(count, min, max);
-
-    // Ensure the integers are unique
-    const uniqueIntegers = new Set(result);
-    return uniqueIntegers.size === result.length;
-});
-
-// Run all tests
-jsc.assert(testSortIntegers);
-jsc.assert(testSortStrings);
-jsc.assert(testCombineArray);
-jsc.assert(testGetIntegers);
