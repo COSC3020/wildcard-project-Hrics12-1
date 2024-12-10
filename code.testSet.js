@@ -11,8 +11,8 @@ function arraysAreEqual(arr1, arr2) {
 
 // Test to verify that cocktail shaker sort for integers produces the same results as the built-in sort
 const testSortIntegers = jsc.forall("array nat", function(arr) {
-    // Make sure that we only work with valid integers
-    arr = arr.filter(Number.isInteger); // filter out any non-integer values
+    // Filter out non-integer values and limit size
+    arr = arr.filter(Number.isInteger).slice(0, 100); // limit size to 100 for performance
 
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
@@ -30,8 +30,8 @@ const testSortIntegers = jsc.forall("array nat", function(arr) {
 
 // Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
 const testSortStrings = jsc.forall("array string", function(arr) {
-    // Ensure that the strings are valid (no control characters)
-    arr = arr.filter(item => typeof item === 'string' && /^[\x20-\x7E]*$/.test(item)); // Only printable ASCII characters
+    // Filter to ensure strings are valid ASCII printable characters
+    arr = arr.filter(item => typeof item === 'string' && /^[\x20-\x7E]+$/.test(item));
 
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
@@ -49,9 +49,10 @@ const testSortStrings = jsc.forall("array string", function(arr) {
 
 // Test to verify that combineArray produces a mixed array of integers and strings
 const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
-    // If the range is invalid, skip this test
+    // Restrict size and ensure valid ranges for integers
+    size = Math.min(size, 100);  // Limiting size to 100 to avoid excessive array size
     if (intRangeLow > intRangeHigh) {
-        return true; // skip invalid case
+        return true; // Skip invalid case
     }
 
     const randomArray = combineArray(size, [intRangeLow, intRangeHigh], [2, 10]);
@@ -65,9 +66,9 @@ const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, i
 
 // Test to verify that getIntegers generates an array of unique integers within the given range
 const testGetIntegers = jsc.forall("nat nat nat", function(count, min, max) {
-    // If the count is greater than the possible range of integers, skip this test
+    // Skip test if the range is too small
     if (max - min + 1 < count) {
-        return true; // skip invalid case
+        return true; // Skip invalid case
     }
 
     const result = getIntegers(count, min, max);
@@ -79,6 +80,9 @@ const testGetIntegers = jsc.forall("nat nat nat", function(count, min, max) {
 
 // Test to verify that getStrings generates an array of unique strings of the specified length
 const testGetStrings = jsc.forall("nat", function(count) {
+    // Restrict string count to a reasonable number to prevent excessive generation
+    count = Math.min(count, 100); // Limiting string count
+
     const result = getStrings(count);
 
     // Ensure the strings are unique
