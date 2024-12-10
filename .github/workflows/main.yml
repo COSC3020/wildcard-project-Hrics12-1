@@ -23,14 +23,15 @@ jobs:
         with:
           node-version: '16'
 
-      # Install jsverify (if package.json is in root directory)
-      - name: Install jsverify
-        run: npm install jsverify
+      # Install dependencies (including Jest)
+      - name: Install dependencies
+        run: |
+          npm install
 
       # Run tests for WildCardCocktailSort.js (code.test.js)
       - name: Run Tests for WildCardCocktailSort.js (code.test.js)
-        run: node code.test.js
+        run: npm run test:wildcard
 
       # Run tests for WCSetintsAndStrings.js (code.testSet.js)
       - name: Run Tests for WCSetintsAndStrings.js (code.testSet.js)
-        run: node code.testSet.js
+        run: npm run test:wcsetints
