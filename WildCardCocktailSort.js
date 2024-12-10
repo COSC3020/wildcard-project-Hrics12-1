@@ -12,7 +12,7 @@ function getRandomString(length) {
     }
     return result;
 }
-
+ 
 function combineArray(size, intRange, strLengthRange) {
     const randomArray = [];
 
