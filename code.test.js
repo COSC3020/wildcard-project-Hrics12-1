@@ -6,11 +6,12 @@ eval(fs.readFileSync('WildCardCocktailSort.js') + '');
 
 // Function to compare two arrays
 function arraysAreEqual(arr1, arr2) {
-    return JSON.stringify(arr1) === JSON.stringify(arr2);
+  return JSON.stringify(arr1) === JSON.stringify(arr2);
 }
 
 // Test to verify that cocktail shaker sort for integers produces the same results as the built-in sort
-const testSortIntegers = jsc.forall("array nat", function(arr) {
+test('cocktailShakerSort sorts integers correctly', () => {
+  return jsc.checkForall("array nat", function(arr) {
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
@@ -23,10 +24,12 @@ const testSortIntegers = jsc.forall("array nat", function(arr) {
 
     // Compare both sorted arrays
     return arraysAreEqual(a1, a2);
+  });
 });
 
 // Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
-const testSortStrings = jsc.forall("array string", function(arr) {
+test('cocktailShakerSortStrings sorts strings correctly', () => {
+  return jsc.checkForall("array string", function(arr) {
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
@@ -39,16 +42,18 @@ const testSortStrings = jsc.forall("array string", function(arr) {
 
     // Compare both sorted arrays
     return arraysAreEqual(a1, a2);
+  });
 });
 
 // Test to verify that combineArray produces a mixed array of integers and strings
-const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
+test('combineArray returns an array with mixed integers and strings', () => {
+  return jsc.checkForall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
     // Ensure the size is within reasonable limits
     size = Math.min(size, 100);  // Limiting size to 100 to avoid excessive array size
 
     // Skip invalid cases where the range is incorrect
     if (intRangeLow > intRangeHigh || intRangeLow < 0 || intRangeHigh < 0) {
-        return true; // Skip this test case
+      return true; // Skip this test case
     }
 
     // Generate a combined array
@@ -59,5 +64,5 @@ const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, i
     const containsStrings = randomArray.some(item => typeof item === 'string');
 
     return containsIntegers && containsStrings;
+  });
 });
-
