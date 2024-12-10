@@ -118,5 +118,10 @@ function cocktailShakerSortStrings(arr) {
     return arr;
 }
 
-
+module.exports = {
+    combineArray,
+    sortArrayByType,
+    cocktailShakerSort,
+    cocktailShakerSortStrings
+};
 
