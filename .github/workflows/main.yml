@@ -1,0 +1,41 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # Install dependencies (including Jest)
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Run tests for WildCardCocktailSort.js (code.test.js)
+      - name: Run Tests for WildCardCocktailSort.js (code.test.js)
+        run: npm run test:wildcard
+
+      # Run tests for WCSetintsAndStrings.js (code.testSet.js)
+      - name: Run Tests for WCSetintsAndStrings.js (code.testSet.js)
+        run: npm run test:wcsetints
+
+      # Run tests for WildcardMerge.js (code.testMerge.js)
+      - name: Run Tests for WildcardMerge.js (code.testMerge.js)
+        run: npm run test:wcmerge
