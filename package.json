@@ -1,0 +1,12 @@
+{
+  "name": "wildcard-project",
+  "version": "1.0.0",
+  "description": "Wildcard Cocktail Sort Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "node code.test.js"
+  },
+  "dependencies": {
+    "jsverify": "^0.9.1"
+  }
+}
