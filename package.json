@@ -7,7 +7,7 @@
     "test": "npm run test:wildcard && npm run test:wcsetints && npm run test:wcmerge",
     "test:wildcard": "jest code.test.js", 
     "test:wcsetints": "jest code.testSet.js",
-    "test:wcmerge": "jest code.testMerge.js"  // New test script for WildcardMerge.js
+    "test:wcmerge": "jest code.testMerge.js"
   },
   "dependencies": {
     "jsverify": "^0.6.3"
