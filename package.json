@@ -4,14 +4,16 @@
   "description": "A project to test WildCardCocktailSort and WCSetintsAndStrings",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:wildcard && npm run test:wcsetints", 
-    "test:wildcard": "node code.test.js", 
-    "test:wcsetints": "node code.testSet.js"
+    "test": "npm run test:wildcard && npm run test:wcsetints",
+    "test:wildcard": "jest code.test.js", 
+    "test:wcsetints": "jest code.testSet.js"
   },
   "dependencies": {
     "jsverify": "^0.6.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
   "author": "",
   "license": "ISC"
 }
