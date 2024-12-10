@@ -51,4 +51,8 @@ const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, i
     const randomArray = combineArray(size, [intRangeLow, intRangeHigh], [2, 10]);
 
     // Ensure that the array has both integers and strings
-    const containsIntegers = random
+    const containsIntegers = randomArray.some(item => typeof item === 'number');
+    const containsStrings = randomArray.some(item => typeof item === 'string');
+
+    return containsIntegers && containsStrings;
+});
