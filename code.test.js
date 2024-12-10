@@ -11,7 +11,7 @@ function arraysAreEqual(arr1, arr2) {
 
 // Test to verify that cocktail shaker sort for integers produces the same results as the built-in sort
 test('cocktailShakerSort sorts integers correctly', () => {
-  return jsc.checkForall("array nat", function(arr) {
+  return jsc.forall("array nat", function(arr) {
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
@@ -29,7 +29,7 @@ test('cocktailShakerSort sorts integers correctly', () => {
 
 // Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
 test('cocktailShakerSortStrings sorts strings correctly', () => {
-  return jsc.checkForall("array string", function(arr) {
+  return jsc.forall("array string", function(arr) {
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
@@ -47,7 +47,7 @@ test('cocktailShakerSortStrings sorts strings correctly', () => {
 
 // Test to verify that combineArray produces a mixed array of integers and strings
 test('combineArray returns an array with mixed integers and strings', () => {
-  return jsc.checkForall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
+  return jsc.forall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
     // Ensure the size is within reasonable limits
     size = Math.min(size, 100);  // Limiting size to 100 to avoid excessive array size
 
