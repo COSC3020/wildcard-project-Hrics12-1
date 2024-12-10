@@ -11,7 +11,6 @@ function arraysAreEqual(arr1, arr2) {
 
 // Test to verify that cocktail shaker sort for integers produces the same results as the built-in sort
 const testSortIntegers = jsc.forall("array nat", function(arr) {
-    // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
 
@@ -27,7 +26,6 @@ const testSortIntegers = jsc.forall("array nat", function(arr) {
 
 // Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
 const testSortStrings = jsc.forall("array string", function(arr) {
-    // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
 
@@ -43,7 +41,6 @@ const testSortStrings = jsc.forall("array string", function(arr) {
 
 // Test to verify that combineArray produces a mixed array of integers and strings
 const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
-    // If the range is invalid, skip this test
     if (intRangeLow > intRangeHigh) {
         return true; // skip invalid case
     }
@@ -56,3 +53,63 @@ const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, i
 
     return containsIntegers && containsStrings;
 });
+
+// Test to ensure that getRandomInts produces values within the specified range
+const testGetRandomInts = jsc.forall("nat nat", function(min, max) {
+    if (min > max) return true; // skip invalid case
+    const randomInt = getRandomInts(min, max);
+    return randomInt >= min && randomInt <= max;
+});
+
+// Test to ensure getRandomString generates a string of the correct length
+const testGetRandomString = jsc.forall("nat", function(length) {
+    const randomString = getRandomString(length);
+    return randomString.length === length;
+});
+
+// Test to ensure getIntegers generates the correct number of unique integers within a given range
+const testGetIntegers = jsc.forall("nat nat nat", function(count, min, max) {
+    if (count < 1 || min > max) return true; // skip invalid case
+    const integers = getIntegers(count, min, max);
+    return integers.length === count && integers.every(i => i >= min && i <= max && Number.isInteger(i)) && new Set(integers).size === integers.length;
+});
+
+// Test to ensure getStrings generates the correct number of unique strings
+const testGetStrings = jsc.forall("nat", function(count) {
+    if (count < 1) return true; // skip invalid case
+    const strings = getStrings(count);
+    return strings.length === count && strings.every(s => typeof s === 'string') && new Set(strings).size === strings.length;
+});
+
+// Performance Test (similar to your second script)
+const testPerformance = jsc.forall("nat", function(size) {
+    const intRange = [1, 50];
+    const strLengthRange = [1, 1];
+
+    // Generate a random array for testing
+    const randomArray = combineArray(size, intRange, strLengthRange);
+
+    const { integers, strings } = sortArrayByType(randomArray);
+
+    let startTime = performance.now();
+    cocktailShakerSort(integers);
+    let endTime = performance.now();
+    console.log(`Time to sort integers (size ${size}): ${(endTime - startTime).toFixed(3)} ms`);
+
+    startTime = performance.now();
+    cocktailShakerSortStrings(strings);
+    endTime = performance.now();
+    console.log(`Time to sort strings (size ${size}): ${(endTime - startTime).toFixed(3)} ms`);
+
+    return true;
+});
+
+// Run the tests
+jsc.run(testSortIntegers);
+jsc.run(testSortStrings);
+jsc.run(testCombineArray);
+jsc.run(testGetRandomInts);
+jsc.run(testGetRandomString);
+jsc.run(testGetIntegers);
+jsc.run(testGetStrings);
+jsc.run(testPerformance);
