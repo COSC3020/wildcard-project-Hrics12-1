@@ -11,6 +11,9 @@ function arraysAreEqual(arr1, arr2) {
 
 // Test to verify that cocktail shaker sort for integers produces the same results as the built-in sort
 const testSortIntegers = jsc.forall("array nat", function(arr) {
+    // Make sure that we only work with valid integers
+    arr = arr.filter(Number.isInteger); // filter out any non-integer values
+
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
@@ -27,6 +30,9 @@ const testSortIntegers = jsc.forall("array nat", function(arr) {
 
 // Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
 const testSortStrings = jsc.forall("array string", function(arr) {
+    // Ensure that we are only dealing with valid strings
+    arr = arr.filter(item => typeof item === 'string');
+
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
