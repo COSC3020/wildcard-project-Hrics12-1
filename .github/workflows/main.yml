@@ -35,3 +35,7 @@ jobs:
       # Run tests for WCSetintsAndStrings.js (code.testSet.js)
       - name: Run Tests for WCSetintsAndStrings.js (code.testSet.js)
         run: npm run test:wcsetints
+
+      # Run tests for WildcardMerge.js (code.testMerge.js)
+      - name: Run Tests for WildcardMerge.js (code.testMerge.js)
+        run: npm run test:wcmerge
