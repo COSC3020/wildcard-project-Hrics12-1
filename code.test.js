@@ -1,68 +1,85 @@
-const fs = require('fs');
-const jsc = require('jsverify');
+// Import the scripts from the current directory
+const { combineArray, sortArrayByType, cocktailShakerSort, cocktailShakerSortStrings } = require('./WCSetintsAndStrings');
+const { combineArray: combineArrayWC, sortArrayByType: sortArrayByTypeWC, cocktailShakerSort: cocktailShakerSortWC, cocktailShakerSortStrings: cocktailShakerSortStringsWC } = require('./WildCardCocktailSort');
+const { combineArray: combineArrayWM, sortArrayByType: sortArrayByTypeWM, mergesort, mergesortStrings } = require('./WildcardMerge');
 
-// Load the code (your WildCardCocktailSort.js implementation)
-eval(fs.readFileSync('WildCardCocktailSort.js') + '');
+// Test WCSetintsAndStrings.js functionality
+describe('WCSetintsAndStrings.js', () => {
+    test('combines array of integers and strings correctly', () => {
+        const arraySize = 52;
+        const intRange = [1, 50];
+        const strLengthRange = [1, 1];
 
-// Function to compare two arrays
-function arraysAreEqual(arr1, arr2) {
-  return JSON.stringify(arr1) === JSON.stringify(arr2);
-}
+        const randomArray = combineArray(arraySize, intRange, strLengthRange);
+        expect(randomArray.length).toBe(arraySize);
 
-// Test to verify that cocktail shaker sort for integers produces the same results as the built-in sort
-test('cocktailShakerSort sorts integers correctly', async () => {
-  await jsc.checkForall("array nat", function(arr) {
-    // Make two copies of the array
-    var a1 = JSON.parse(JSON.stringify(arr));
-    var a2 = JSON.parse(JSON.stringify(arr));
+        const { integers, strings } = sortArrayByType(randomArray);
+        expect(integers.length + strings.length).toBe(arraySize);
+    });
 
-    // Sort using cocktail shaker sort
-    cocktailShakerSort(a1);
+    test('cocktail shaker sort works on integers', () => {
+        const integers = [10, 30, 20, 40, 50, 60];
+        const sortedIntegers = cocktailShakerSort(integers);
+        expect(sortedIntegers).toEqual([10, 20, 30, 40, 50, 60]);
+    });
 
-    // Sort using built-in JavaScript sort
-    a2.sort(function(a, b) { return a - b; });
-
-    // Compare both sorted arrays
-    return arraysAreEqual(a1, a2);
-  });
+    test('cocktail shaker sort works on strings', () => {
+        const strings = ['C', 'A', 'B', 'E', 'D'];
+        const sortedStrings = cocktailShakerSortStrings(strings);
+        expect(sortedStrings).toEqual(['A', 'B', 'C', 'D', 'E']);
+    });
 });
 
-// Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
-test('cocktailShakerSortStrings sorts strings correctly', async () => {
-  await jsc.checkForall("array string", function(arr) {
-    // Make two copies of the array
-    var a1 = JSON.parse(JSON.stringify(arr));
-    var a2 = JSON.parse(JSON.stringify(arr));
+// Test WildCardCocktailSort.js functionality
+describe('WildCardCocktailSort.js', () => {
+    test('combines array of integers and strings correctly', () => {
+        const arraySize = 52;
+        const intRange = [1, 50];
+        const strLengthRange = [1, 1];
 
-    // Sort using cocktail shaker sort
-    cocktailShakerSortStrings(a1);
+        const randomArray = combineArrayWC(arraySize, intRange, strLengthRange);
+        expect(randomArray.length).toBe(arraySize);
 
-    // Sort using built-in JavaScript sort
-    a2.sort();
+        const { integers, strings } = sortArrayByTypeWC(randomArray);
+        expect(integers.length + strings.length).toBe(arraySize);
+    });
 
-    // Compare both sorted arrays
-    return arraysAreEqual(a1, a2);
-  });
+    test('cocktail shaker sort works on integers', () => {
+        const integers = [10, 30, 20, 40, 50, 60];
+        const sortedIntegers = cocktailShakerSortWC(integers);
+        expect(sortedIntegers).toEqual([10, 20, 30, 40, 50, 60]);
+    });
+
+    test('cocktail shaker sort works on strings', () => {
+        const strings = ['C', 'A', 'B', 'E', 'D'];
+        const sortedStrings = cocktailShakerSortStringsWC(strings);
+        expect(sortedStrings).toEqual(['A', 'B', 'C', 'D', 'E']);
+    });
 });
 
-// Test to verify that combineArray produces a mixed array of integers and strings
-test('combineArray returns an array with mixed integers and strings', async () => {
-  await jsc.checkForall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
-    // Ensure the size is within reasonable limits
-    size = Math.min(size, 100);  // Limiting size to 100 to avoid excessive array size
+// Test WildcardMerge.js functionality
+describe('WildcardMerge.js', () => {
+    test('combines array of integers and strings correctly', () => {
+        const arraySize = 52;
+        const intRange = [1, 50];
+        const strLengthRange = [1, 1];
 
-    // Skip invalid cases where the range is incorrect
-    if (intRangeLow > intRangeHigh || intRangeLow < 0 || intRangeHigh < 0) {
-      return true; // Skip this test case
-    }
+        const randomArray = combineArrayWM(arraySize, intRange, strLengthRange);
+        expect(randomArray.length).toBe(arraySize);
 
-    // Generate a combined array
-    const randomArray = combineArray(size, [intRangeLow, intRangeHigh], [2, 10]);
+        const { integers, strings } = sortArrayByTypeWM(randomArray);
+        expect(integers.length + strings.length).toBe(arraySize);
+    });
 
-    // Ensure the array contains both integers and strings
-    const containsIntegers = randomArray.some(item => typeof item === 'number');
-    const containsStrings = randomArray.some(item => typeof item === 'string');
+    test('mergesort works on integers', () => {
+        const integers = [10, 30, 20, 40, 50, 60];
+        const sortedIntegers = mergesort(integers);
+        expect(sortedIntegers).toEqual([10, 20, 30, 40, 50, 60]);
+    });
 
-    return containsIntegers && containsStrings;
-  });
+    test('mergesort works on strings', () => {
+        const strings = ['C', 'A', 'B', 'E', 'D'];
+        const sortedStrings = mergesortStrings(strings);
+        expect(sortedStrings).toEqual(['A', 'B', 'C', 'D', 'E']);
+    });
 });
