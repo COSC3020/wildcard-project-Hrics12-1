@@ -1,12 +1,17 @@
 {
   "name": "wildcard-project",
   "version": "1.0.0",
-  "description": "Wildcard Cocktail Sort Project",
+  "description": "A project to test WildCardCocktailSort and WCSetintsAndStrings",
   "main": "index.js",
   "scripts": {
-    "test": "node code.test.js"
+    "test": "npm run test:wildcard && npm run test:wcsetints", 
+    "test:wildcard": "node code.test.js", 
+    "test:wcsetints": "node code.testSet.js"
   },
   "dependencies": {
-    "jsverify": "^0.9.1"
-  }
+    "jsverify": "^0.6.3"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
