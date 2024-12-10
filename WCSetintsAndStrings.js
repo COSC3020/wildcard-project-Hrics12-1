@@ -8,7 +8,7 @@ function getRandomString(length) {
     for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    return result;
+    return result; 
 }
 function getIntegers(count, min, max) {
     const integers = [];
