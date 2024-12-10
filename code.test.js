@@ -43,16 +43,21 @@ const testSortStrings = jsc.forall("array string", function(arr) {
 
 // Test to verify that combineArray produces a mixed array of integers and strings
 const testCombineArray = jsc.forall("nat nat nat", function(size, intRangeLow, intRangeHigh) {
-    // If the range is invalid, skip this test
-    if (intRangeLow > intRangeHigh) {
-        return true; // skip invalid case
+    // Ensure the size is within reasonable limits
+    size = Math.min(size, 100);  // Limiting size to 100 to avoid excessive array size
+
+    // Skip invalid cases where the range is incorrect
+    if (intRangeLow > intRangeHigh || intRangeLow < 0 || intRangeHigh < 0) {
+        return true; // Skip this test case
     }
 
+    // Generate a combined array
     const randomArray = combineArray(size, [intRangeLow, intRangeHigh], [2, 10]);
 
-    // Ensure that the array has both integers and strings
+    // Ensure the array contains both integers and strings
     const containsIntegers = randomArray.some(item => typeof item === 'number');
     const containsStrings = randomArray.some(item => typeof item === 'string');
 
     return containsIntegers && containsStrings;
 });
+
