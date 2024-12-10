@@ -71,11 +71,4 @@ const testGetIntegers = jsc.forall("nat nat nat", function(count, min, max) {
 
     // Ensure the integers are unique
     const uniqueIntegers = new Set(result);
-    return uniqueIntegers.size === result.length;
-});
-
-// Run all tests
-jsc.assert(testSortIntegers);
-jsc.assert(testSortStrings);
-jsc.assert(testCombineArray);
-jsc.assert(testGetIntegers);
+    return uniqueIntegers.size === result.l;
