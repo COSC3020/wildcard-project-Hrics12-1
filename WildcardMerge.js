@@ -111,27 +111,11 @@ function mergeStrings(left, right) {
     return result.concat(left.slice(leftIndex), right.slice(rightIndex));
 }
 
-const arraySize = 1000000; // Size of the array
-const intRange = [1, 50]; // Range for random integers
-const strLengthRange = [1, 5]; // Range for string lengths
 
-const randomArray = combineArray(arraySize, intRange, strLengthRange);
-console.log(randomArray);
-console.log("\n");
+module.exports = {
+    combineArray,
+    sortArrayByType,
+    mergesort,
+    mergesortStrings
+};
 
-const { integers, strings } = sortArrayByType(randomArray);
-
-// Start sorting integers and measure time
-let startTime = performance.now(); // Capture start time
-const sortedIntegers = mergesort(integers);
-let endTime = performance.now(); // Capture end time
-console.log(`Total time to sort integers: ${(endTime - startTime).toFixed(3)} ms`);
-console.log('Integers:', sortedIntegers);
-console.log("\n");
-
-// Measure time for sorting strings
-startTime = performance.now(); 
-const sortedStrings = mergesortStrings(strings);
-endTime = performance.now(); 
-console.log(`Total time to sort strings: ${(endTime - startTime).toFixed(3)} ms`);
-console.log('Strings:', sortedStrings);
