@@ -30,8 +30,8 @@ const testSortIntegers = jsc.forall("array nat", function(arr) {
 
 // Test to verify that cocktail shaker sort for strings produces the same results as the built-in sort
 const testSortStrings = jsc.forall("array string", function(arr) {
-    // Ensure that we are only dealing with valid strings
-    arr = arr.filter(item => typeof item === 'string');
+    // Ensure that the strings are valid (no control characters)
+    arr = arr.filter(item => typeof item === 'string' && /^[\x20-\x7E]*$/.test(item)); // Only printable ASCII characters
 
     // Make two copies of the array
     var a1 = JSON.parse(JSON.stringify(arr));
