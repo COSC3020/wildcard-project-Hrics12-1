@@ -14,15 +14,13 @@ const testSortIntegers = jsc.forall("array nat", function(arr) {
     // Filter out non-integer values and limit size
     arr = arr.filter(Number.isInteger).slice(0, 100); // limit size to 100 for performance
 
-    // Make two copies of the array
+    // Sort using cocktail shaker sort
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
-
-    // Sort using cocktail shaker sort
     cocktailShakerSort(a1);
 
     // Sort using built-in JavaScript sort
-    a2.sort(function(a, b) { return a - b; });
+    a2.sort((a, b) => a - b);
 
     // Compare both sorted arrays
     return arraysAreEqual(a1, a2);
@@ -33,11 +31,9 @@ const testSortStrings = jsc.forall("array string", function(arr) {
     // Filter to ensure strings are valid ASCII printable characters
     arr = arr.filter(item => typeof item === 'string' && /^[\x20-\x7E]+$/.test(item));
 
-    // Make two copies of the array
+    // Sort using cocktail shaker sort
     var a1 = JSON.parse(JSON.stringify(arr));
     var a2 = JSON.parse(JSON.stringify(arr));
-
-    // Sort using cocktail shaker sort
     cocktailShakerSortStrings(a1);
 
     // Sort using built-in JavaScript sort
