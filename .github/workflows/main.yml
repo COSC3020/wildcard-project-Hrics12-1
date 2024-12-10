@@ -17,19 +17,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # Install dependencies
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Specify your required Node.js version
+          node-version: '16'
 
-      - name: Install Dependencies
-        run: npm install
+      # Install jsverify
+      - name: Install jsverify
+        run: npm install jsverify
+        working-directory: ./frontend  # Adjust this if needed
 
       # Run tests for WildCardCocktailSort.js (code.test.js)
       - name: Run Tests for WildCardCocktailSort.js (code.test.js)
         run: node code.test.js
+        working-directory: ./frontend  # Adjust this if needed
 
       # Run tests for WCSetintsAndStrings.js (code.testSet.js)
       - name: Run Tests for WCSetintsAndStrings.js (code.testSet.js)
         run: node code.testSet.js
+        working-directory: ./frontend  # Adjust this if needed
