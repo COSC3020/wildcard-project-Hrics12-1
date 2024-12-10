@@ -126,25 +126,9 @@ function cocktailShakerSortStrings(arr) {
     return arr;
 }
 
-const arraySize = 52; 
-const intRange = [1, 50]; 
-const strLengthRange = [1, 1]; 
-
-const randomArray = combineArray(arraySize, intRange, strLengthRange);
-console.log(randomArray);
-console.log("\n");
-
-const { integers, strings } = sortArrayByType(randomArray);
-
-let startTime = performance.now(); 
-const sortedIntegers = cocktailShakerSort(integers);
-let endTime = performance.now(); 
-console.log(`Total time to sort integers: ${(endTime - startTime).toFixed(3)} ms`);
-console.log('Integers:', sortedIntegers);
-console.log("\n");
-
-startTime = performance.now(); 
-const sortedStrings = cocktailShakerSortStrings(strings);
-endTime = performance.now(); 
-console.log(`Total time to sort strings: ${(endTime - startTime).toFixed(3)} ms`);
-console.log('Strings:', sortedStrings);
+module.exports = {
+    combineArray,
+    sortArrayByType,
+    cocktailShakerSort,
+    cocktailShakerSortStrings
+};
