@@ -104,12 +104,12 @@ const testPerformance = jsc.forall("nat", function(size) {
     return true;
 });
 
-// Run the tests
-jsc.run(testSortIntegers);
-jsc.run(testSortStrings);
-jsc.run(testCombineArray);
-jsc.run(testGetRandomInts);
-jsc.run(testGetRandomString);
-jsc.run(testGetIntegers);
-jsc.run(testGetStrings);
-jsc.run(testPerformance);
+// Run the tests using jsc.check()
+jsc.check(testSortIntegers);
+jsc.check(testSortStrings);
+jsc.check(testCombineArray);
+jsc.check(testGetRandomInts);
+jsc.check(testGetRandomString);
+jsc.check(testGetIntegers);
+jsc.check(testGetStrings);
+jsc.check(testPerformance);
